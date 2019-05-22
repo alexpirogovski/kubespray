@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM centos:7.4.1708
 
 RUN mkdir /kubespray
 WORKDIR /kubespray
