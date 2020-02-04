@@ -1,6 +1,6 @@
 ---
 kind: DaemonSet
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: canal-node
   namespace: kube-system
@@ -15,10 +15,9 @@ spec:
       labels:
         k8s-app: canal-node
     spec:
-{% if kube_version is version('v1.11.1', '>=') %}
       priorityClassName: system-node-critical
-{% endif %}
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       serviceAccountName: canal
       tolerations:
         - operator: Exists
@@ -249,14 +248,16 @@ spec:
             privileged: true
           livenessProbe:
             httpGet:
+              host: 127.0.0.1
               path: /liveness
               port: 9099
             periodSeconds: 10
-            initialDelaySeconds: 10
+            initialDelaySeconds: 5
             failureThreshold: 6
           readinessProbe:
 {% if calico_version is version('v3.3.0', '<')%}
             httpGet:
+              host: 127.0.0.1
               path: /readiness
               port: 9099
 {% else %}
