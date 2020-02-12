@@ -10,6 +10,14 @@
         name: kubelet
         state: restarted
       become: yes
+     
+     -name: Fetch admin.cont
+      copy:
+        src: "etc/kubernetes/admin.conf"
+        dest: "{{ inventory_dir }}/artifacts/named_admin.conf"
+        mode: 0644
+      become: yes
+      run_once: yes
 
 - hosts: k8s-clients:k8s-cluster
   tasks:
@@ -20,7 +28,7 @@
 
     - name: "Copy admin kube config file to node"
       copy:
-        src: "/etc/kubernetes/admin.conf"
+        src: "{{ inventory_dir }}/artifacts/named_admin.conf"
         dest: "/home/{{ ansible_user }}/.kube/config"
         owner: "{{ ansible_user }}"
         mode: 0644
