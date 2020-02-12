@@ -20,9 +20,11 @@
 
     - name: "Copy admin kube config file to node"
       copy:
-        src: "{{ inventory_dir }}/artifacts/admin.conf"
+        src: "/etc/kubernetes//admin.conf"
         dest: "/home/{{ ansible_user }}/.kube/config"
         owner: "{{ ansible_user }}"
+        mode: 0644
+      become: yes
 
     - name: Copy kubectl binary to client
       copy:
