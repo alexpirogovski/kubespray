@@ -20,7 +20,7 @@
 
     - name: "Copy admin kube config file to node"
       copy:
-        src: "/etc/kubernetes//admin.conf"
+        src: "/etc/kubernetes/admin.conf"
         dest: "/home/{{ ansible_user }}/.kube/config"
         owner: "{{ ansible_user }}"
         mode: 0644
