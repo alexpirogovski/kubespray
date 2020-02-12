@@ -11,7 +11,7 @@
         state: restarted
       become: yes
      
-     -name: Fetch admin.cont
+    - name: Fetch admin.conf
       copy:
         src: "etc/kubernetes/admin.conf"
         dest: "{{ inventory_dir }}/artifacts/named_admin.conf"
