@@ -75,9 +75,10 @@ def main():
     servers = [(mgmt, data) for mgmt, data, _ in args.servers]
     gen_templates.from_cli(servers, args.clients, args.user, args.password, args.apiserver_vip)
     servers_supp_ips = [supp_ip for _, _, supp_ip in args.servers]
+    for _, data_ip, _ in args.servers:
+        servers_supp_ips.append(data_ip)
     if args.apiserver_vip and 'ip_address' in args.apiserver_vip:
         servers_supp_ips.append(args.apiserver_vip['ip_address'])
-    servers_supp_ips.append('10.0.17.104')
     run(args.reset, servers_supp_ips)
 
 
