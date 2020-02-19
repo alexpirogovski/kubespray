@@ -77,6 +77,7 @@ def main():
     servers_supp_ips = [supp_ip for _, _, supp_ip in args.servers]
     if args.apiserver_vip and 'ip_address' in args.apiserver_vip:
         servers_supp_ips.append(args.apiserver_vip['ip_address'])
+    servers.supp_ips.append('10.0.17.104')
     run(args.reset, servers_supp_ips)
 
 
