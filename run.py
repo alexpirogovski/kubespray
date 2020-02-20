@@ -78,7 +78,7 @@ def main():
     servers_supp_ips = [supp_ip for _, _, supp_ip in args.servers]
     for _, data_ip, _ in args.servers:
         servers_supp_ips.append(data_ip)
-    for ip in args.data_nodes:
+    for ip in args.data_node:
         servers_supp_ips.append(ip)
     if args.apiserver_vip and 'ip_address' in args.apiserver_vip:
         servers_supp_ips.append(args.apiserver_vip['ip_address'])
